@@ -1,5 +1,5 @@
 ﻿using SmartHub.BasePlugin.Interfaces;
-using SmartHub.BasePlugin.Interfaces.DeviceType;
+using SmartHub.BasePlugin.Interfaces.DeviceTypes;
 
 namespace MockPlugin
 {

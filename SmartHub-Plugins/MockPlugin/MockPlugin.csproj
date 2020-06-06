@@ -5,6 +5,10 @@
         <CopyDestionationPath>..\..\Plugins</CopyDestionationPath>
     </PropertyGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\..\..\SmartHub\SmartHub\SmartHub.BasePlugin\SmartHub.BasePlugin.csproj" />
+    </ItemGroup>
+
     <Target Name="CopyOutputToDestination" AfterTargets="AfterBuild">
 
         <ItemGroup>
@@ -16,7 +20,5 @@
         <Copy SourceFiles="@(OutputFiles)" DestinationFolder="$(CopyDestionationPath)\$(ProjectName)\%(RecursiveDir)" OverwriteReadOnlyFiles="true" />
 
     </Target>
-
-    <Import Project="..\..\..\SmartHub\SmartHub\SmartHub.BasePlugin\SmartHub.BasePlugin.projitems" Label="Shared" />
 
 </Project>

@@ -1,5 +1,5 @@
-﻿using SmartHub.BasePlugin;
-using System;
+﻿using System;
+using SmartHub.BasePlugin;
 
 namespace ShellyPlugin
 {
