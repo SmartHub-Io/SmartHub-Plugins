@@ -237,3 +237,5 @@ SmartHub.Api/ClientApp/node_modules/
 # Intellij
 SmartHub/.idea
 
+
+SmartHub-Plugins/.idea/
