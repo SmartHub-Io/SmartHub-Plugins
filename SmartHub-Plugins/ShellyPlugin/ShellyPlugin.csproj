@@ -1,24 +1,31 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
-    <CopyDestionationPath>..\..\Plugins</CopyDestionationPath>
-  </PropertyGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\..\..\SmartHub\SmartHub\SmartHub.BasePlugin\SmartHub.BasePlugin.csproj" />
-  </ItemGroup>
-
-  <Target Name="CopyOutputToDestination" AfterTargets="AfterBuild">
+    <PropertyGroup>
+        <TargetFramework>netcoreapp3.1</TargetFramework>
+        <CopyDestionationPath>..\..\Plugins</CopyDestionationPath>
+    </PropertyGroup>
 
     <ItemGroup>
-      <OutputFiles Include="$(OutDir)**\*" />
+        <ProjectReference Include="..\..\..\SmartHub\SmartHub\SmartHub.BasePlugin\SmartHub.BasePlugin.csproj"
+                          Private="false"
+        />
     </ItemGroup>
 
-    <Message Text="Copying output file to destination: @(OutputFiles)" Importance="high" />
+    <Target Name="CopyOutputToDestination" AfterTargets="AfterBuild">
 
-    <Copy SourceFiles="@(OutputFiles)" DestinationFolder="$(CopyDestionationPath)\$(ProjectName)\%(RecursiveDir)" OverwriteReadOnlyFiles="true" />
+        <ItemGroup>
+            <OutputFiles Include="$(OutDir)**\*"
+                         Exclude="SmartHub.*"
+            />
+        </ItemGroup>
 
-  </Target>
+        <Message Text="Copying output file to destination: @(OutputFiles)" Importance="high"/>
+
+        <Copy SourceFiles="@(OutputFiles)" 
+              DestinationFolder="$(CopyDestionationPath)\$(ProjectName)\%(RecursiveDir)" 
+              OverwriteReadOnlyFiles="true"
+        />
+
+    </Target>
 
 </Project>

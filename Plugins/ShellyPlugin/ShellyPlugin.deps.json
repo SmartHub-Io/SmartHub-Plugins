@@ -13,21 +13,11 @@
         "runtime": {
           "ShellyPlugin.dll": {}
         }
-      },
-      "SmartHub.BasePlugin/1.0.0": {
-        "runtime": {
-          "SmartHub.BasePlugin.dll": {}
-        }
       }
     }
   },
   "libraries": {
     "ShellyPlugin/1.0.0": {
-      "type": "project",
-      "serviceable": false,
-      "sha512": ""
-    },
-    "SmartHub.BasePlugin/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
