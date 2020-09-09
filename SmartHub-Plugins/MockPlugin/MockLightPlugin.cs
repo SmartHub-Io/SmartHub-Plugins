@@ -1,5 +1,4 @@
-﻿using SmartHub.BasePlugin.Interfaces;
-using SmartHub.BasePlugin.Interfaces.DeviceTypes;
+﻿using SmartHub.BasePlugin.Interfaces.DeviceTypes;
 using System;
 using System.Text;
 
@@ -41,7 +40,8 @@ namespace MockPlugin
 			return this;
 		}
 
-		ILight IBuild<ILight>.Instantiate()
+
+		public ILight InstantiateQuery()
 		{
 			Builder = new StringBuilder();
 			Builder.Append("?");
