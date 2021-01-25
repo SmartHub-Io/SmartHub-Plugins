@@ -1,6 +1,7 @@
 ﻿using SmartHub.BasePlugin.Interfaces;
 using SmartHub.BasePlugin.Interfaces.DeviceTypes;
 using System;
+using System.Collections.Generic;
 using System.Text;
 
 namespace MockPlugin
@@ -14,11 +15,17 @@ namespace MockPlugin
 		public DateTime CreatedAt { get; }
 		public bool MqttSupport { get; set; } = false;
 		public bool HttpSupport { get; set; } = true;
-		public double AssemblyVersion { get; }
+		public string AssemblyVersion { get; }
 		public string TurnOnOff { get; set; } = "turn=";
-		private StringBuilder Builder { get; set; }
+		private StringBuilder PathBuilder { get; set; }
 
-		ILight ILight.SetToggleLight(bool? onOff)
+		public ILight InstantiateQuery()
+		{
+			PathBuilder = new();
+			return this;
+		}
+
+		ILight ILight.SetLight(bool? onOff)
 		{
 			if (onOff is null)
 			{
@@ -26,11 +33,11 @@ namespace MockPlugin
 			}
 			if (onOff.Value)
 			{
-				Builder.Append(TurnOnOff + "On");
+				// Builder.Append(TurnOnOff + "On");
 			}
 			if (onOff.Value == false)
 			{
-				Builder.Append(TurnOnOff + "Off");
+				// Builder.Append(TurnOnOff + "Off");
 			}
 			return this;
 		}
@@ -41,16 +48,9 @@ namespace MockPlugin
 			return this;
 		}
 
-		ILight IBuild<ILight>.Instantiate()
+		public Tuple<string, Dictionary<string, string>> Build()
 		{
-			Builder = new StringBuilder();
-			Builder.Append("?");
-			return this;
-		}
-
-		public string Build()
-		{
-			return Builder.ToString();
+			return new(PathBuilder.ToString(), new());
 		}
 	}
 }

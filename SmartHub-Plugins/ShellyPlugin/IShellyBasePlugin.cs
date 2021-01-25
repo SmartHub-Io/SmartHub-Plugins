@@ -5,17 +5,6 @@ namespace ShellyPlugin
 {
 	public interface IShellyBasePlugin : IPlugin
 	{
-		public string Id { get; set; }
-		public bool MqttSupport { get; set; }
-		public bool HttpSupport { get; set; }
-
-		public string Company { get; set; }
-
-		public double AssemblyVersion { get; set; }
-		DateTime ModifiedAt { get; set; }
-
-		DateTime CreatedAt { get; set; }
-
 		#region HTTP
 
 		// All Shelly
