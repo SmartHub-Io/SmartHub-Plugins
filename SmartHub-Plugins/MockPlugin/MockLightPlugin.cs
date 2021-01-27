@@ -13,7 +13,12 @@ namespace MockPlugin
 		public DateTime CreatedAt { get; }
 		public bool MqttSupport { get; set; } = false;
 		public bool HttpSupport { get; set; } = true;
-		public double AssemblyVersion { get; }
+		public string AssemblyVersion { get; }
+		public Tuple<string, Dictionary<string, string>> GetStatus()
+		{
+			throw new NotImplementedException();
+		}
+
 		public string TurnOnOff { get; set; } = "turn=";
 		private StringBuilder Builder { get; set; }
 
@@ -40,8 +45,12 @@ namespace MockPlugin
 			return this;
 		}
 
+		IDevice IBuilder<IDevice>.InstantiateQuery()
+		{
+			return InstantiateQuery();
+		}
 
-		public ILight InstantiateQuery()
+		public Tuple<string, Dictionary<string, string>> Build()
 		{
 			Builder = new StringBuilder();
 			Builder.Append("?");
