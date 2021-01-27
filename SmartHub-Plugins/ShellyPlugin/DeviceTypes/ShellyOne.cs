@@ -5,39 +5,19 @@ using SmartHub.BasePlugin.Interfaces.DeviceTypes;
 
 namespace ShellyPlugin.DeviceTypes
 {
-    public class ShellyOne : ShellyBasePlugin, ILight, IHttpSupport
+    public class ShellyOne : ShellyBase, ILight, IHttpSupport
     {
         public override string Name { get; set; } = $"{nameof(ShellyOne)}";
-        public Tuple<string, Dictionary<string, string>> GetStatus()
+        public string SettingsRelay { get; set; } = "/settings/relay/0";
+        public string Relay { get; set; } = "/relay/0";
+
+
+        ILight GetStatus()
         {
             throw new NotImplementedException();
         }
 
-        public string SettingsRelay { get; set; } = "/settings/relay/0";
-        public string Relay { get; set; } = "/relay/0";
-
-        public ShellyOne()
-        {
-        }
-
-        public ILight InstantiateQuery()
-        {
-            PathBuilder = new();
-            QueryParams = new();
-            return this;
-        }
-
-        IDevice IBuilder<IDevice>.InstantiateQuery()
-        {
-            return InstantiateQuery();
-        }
-
-        public Tuple<string, Dictionary<string, string>> Build()
-        {
-            return new(PathBuilder.ToString(), QueryParams);
-        }
-
-        public ILight SetLight(bool? onOff)
+        ILight ILight.SetLight(bool? onOff)
         {
             if (onOff is null)
             {
@@ -54,9 +34,19 @@ namespace ShellyPlugin.DeviceTypes
             return this;
         }
 
-        public ILight SetRgba(int red, int green, int blue, int alpha)
+        ILight ILight.SetRgba(int red, int green, int blue, int alpha)
         {
             return this;
+        }
+
+        public ILight InstantiateQuery()
+        {
+            throw new NotImplementedException();
+        }
+
+        public ILight SetStatus()
+        {
+            throw new NotImplementedException();
         }
     }
 }

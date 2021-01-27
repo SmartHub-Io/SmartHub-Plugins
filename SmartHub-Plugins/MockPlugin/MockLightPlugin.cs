@@ -1,28 +1,21 @@
 ﻿using SmartHub.BasePlugin.Interfaces.DeviceTypes;
 using System;
+using System.Collections.Generic;
 using System.Text;
 
 namespace MockPlugin
 {
 	public class MockLightPlugin : IMockLightPlugin
 	{
-		public string Id { get; set; } = Guid.NewGuid().ToString();
-		public string Name { get; set; } = $"{nameof(MockLightPlugin)}";
-		public string Company { get; set; } = $"{typeof(MockLightPlugin).Assembly.FullName.Split("P")[0]}";
-		public DateTime ModifiedAt { get; }
-		public DateTime CreatedAt { get; }
-		public bool MqttSupport { get; set; } = false;
-		public bool HttpSupport { get; set; } = true;
-		public string AssemblyVersion { get; }
+		public string TurnOnOff { get; set; } = "turn=";
+		private StringBuilder Builder { get; set; }
+
 		public Tuple<string, Dictionary<string, string>> GetStatus()
 		{
 			throw new NotImplementedException();
 		}
 
-		public string TurnOnOff { get; set; } = "turn=";
-		private StringBuilder Builder { get; set; }
-
-		ILight ILight.SetToggleLight(bool? onOff)
+		ILight ILight.SetLight(bool? onOff)
 		{
 			if (onOff is null)
 			{
@@ -45,21 +38,19 @@ namespace MockPlugin
 			return this;
 		}
 
-		IDevice IBuilder<IDevice>.InstantiateQuery()
+		public ILight InstantiateQuery()
 		{
-			return InstantiateQuery();
+			throw new NotImplementedException();
 		}
 
 		public Tuple<string, Dictionary<string, string>> Build()
 		{
-			Builder = new StringBuilder();
-			Builder.Append("?");
-			return this;
+			throw new NotImplementedException();
 		}
 
-		public string Build()
+		public ILight SetStatus()
 		{
-			return Builder.ToString();
+			throw new NotImplementedException();
 		}
 	}
 }

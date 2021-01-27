@@ -5,7 +5,7 @@ using SmartHub.BasePlugin.Interfaces.DeviceTypes;
 
 namespace ShellyPlugin.DeviceTypes
 {
-    public class ShellyRgbwTwo : ShellyBasePlugin, ILight, IHttpSupport
+    public class ShellyRgbwTwo : ShellyBase, ILight, IHttpSupport
     {
         public override string Name { get; set; } = $"{nameof(ShellyRgbwTwo)}";
 
@@ -15,18 +15,6 @@ namespace ShellyPlugin.DeviceTypes
         public string Color { get; set; } = "/color/0"; // bsp. = /color/0?turn=on&red=220&green=0&blue=2&white=0
         // Settings  => zwischen einzel farben oder alle auf einmal ansprechen
         // settings/?mode=color => alle  settings/?mode=white => einzel
-
-        public IDevice InstantiateQuery()
-        {
-            PathBuilder = new();
-            QueryParams = new();
-            return this;
-        }
-
-        public Tuple<string, Dictionary<string, string>> Build()
-        {
-            return new(PathBuilder.ToString(), QueryParams);
-        }
 
         public ILight SetLight(bool? onOff)
         {
@@ -48,14 +36,18 @@ namespace ShellyPlugin.DeviceTypes
 
         public ILight SetRgba(int red, int green, int blue, int alpha)
         {
-            throw new NotImplementedException();
+            return this;
         }
 
-        public Tuple<string, Dictionary<string, string>> GetStatus()
+        public ILight SetStatus()
         {
-            InstantiateQuery();
             PathBuilder.Append(Status);
-            return Build();
+            return this;
+        }
+
+        public ILight InstantiateQuery()
+        {
+            return this;
         }
     }
 }

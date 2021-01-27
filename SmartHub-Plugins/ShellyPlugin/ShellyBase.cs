@@ -1,25 +1,11 @@
 ﻿using System;
+using SmartHub.BasePlugin;
 
 namespace ShellyPlugin
 {
-	public class ShellyBasePlugin : IShellyBasePlugin
+	public abstract class ShellyBase : AbstractDevice
 	{
-		public string Id { get; set; } = Guid.NewGuid().ToString();
-		public string Name { get; set; } = $"{nameof(ShellyBasePlugin)}";
-		public bool MqttSupport { get; set; } = true;
-		public bool HttpSupport { get; set; } = false;
-
-		public string Company { get; set; } = $"{typeof(ShellyBasePlugin).Assembly.FullName.Split("P")[0]}";
-
-		public double AssemblyVersion { get; set; }
-		public string Query { get; set; }
-
-		public DateTime ModifiedAt { get; set; }
-
-		public DateTime CreatedAt { get; set; }
-
 		#region HTTP
-
 		// All Shelly
 		public string Shelly { get; set; } = "/shelly";
 
@@ -55,34 +41,5 @@ namespace ShellyPlugin
 		// settings/?mode=color => alle  settings/?mode=white => einzel
 
 		#endregion HTTP
-
-		public ShellyBasePlugin()
-		{
-		}
-
-		public void Execute()
-		{
-			throw new NotImplementedException();
-		}
-
-		public string ExecuteHttp()
-		{
-			throw new NotImplementedException();
-		}
-
-		public string ExecuteToggleLightHttp(bool on)
-		{
-			throw new NotImplementedException();
-		}
-
-		public string ExecuteMqtt()
-		{
-			throw new NotImplementedException();
-		}
-
-		public string ExecuteSetting()
-		{
-			throw new NotImplementedException();
-		}
 	}
 }
